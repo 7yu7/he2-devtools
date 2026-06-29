@@ -39,17 +39,7 @@ namespace ui::operation_modes::modes::level_editor {
 			auto& chunks = objWorld->GetWorldChunks();
 			if (!chunks.empty()) {
 				auto* firstChunk = chunks[0];
-				ClearChunkReferences();
-				GetContext().SetFocusedChunk(firstChunk);
-
-				auto& layers = firstChunk->GetLayers();
-				if (!layers.empty()) {
-					ObjectWorldChunkLayer* firstLayer = layers[0];
-					for (auto* layer : layers)
-						if (strcmp(layer->GetName(), firstLayer->GetName()) < 0)
-							firstLayer = layer;
-					GetContext().placementTargetLayer = firstLayer;
-				}
+				ProcessAction(SetFocusedChunkAction{ firstChunk });
 			}
 		}
 	}
