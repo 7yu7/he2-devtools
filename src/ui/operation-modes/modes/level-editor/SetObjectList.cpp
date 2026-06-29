@@ -41,8 +41,10 @@ namespace ui::operation_modes::modes::level_editor {
 
 	bool SetObjectListTreeViewNode::MatchesSearchString(const char* searchString) const
 	{
-		return strstr(GetLabel(), searchString);
-	}
+		auto n = strlen(searchString);
+		for (auto* h = GetLabel(); *h; h++)
+			if (!_strnicmp(h, searchString, n)) return true;
+		return false;	}
 
 	bool SetObjectListTreeViewNode::IsSelected() const
 	{
