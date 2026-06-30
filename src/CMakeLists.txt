@@ -147,6 +147,7 @@ target_sources(${DEVTOOLS_TARGET}
         ui/operation-modes/behaviors/Gizmo.h
         ui/operation-modes/behaviors/MousePicking.h
         ui/operation-modes/behaviors/ObjectLocationVisual3D.h
+        ui/operation-modes/behaviors/SelectionCollider.h
         ui/operation-modes/behaviors/Selection.h
         ui/operation-modes/behaviors/SelectionAabb.h
         ui/operation-modes/behaviors/SelectionMousePicking.h

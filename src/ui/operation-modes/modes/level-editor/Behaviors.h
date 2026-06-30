@@ -200,3 +200,4 @@ namespace ui::operation_modes::modes::level_editor {
 #include <ui/operation-modes/behaviors/GroundContextMenu.h>
 #include <ui/operation-modes/behaviors/DebugCommentsVisual.h>
 #include <ui/operation-modes/behaviors/ObjectLocationVisual3D.h>
+#include <ui/operation-modes/behaviors/SelectionCollider.h>

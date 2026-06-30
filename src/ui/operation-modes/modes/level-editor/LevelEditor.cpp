@@ -28,6 +28,7 @@ namespace ui::operation_modes::modes::level_editor {
 		AddBehavior<ObjectLocationVisual3DBehavior>();
 		AddBehavior<GroundContextMenuBehavior>();
 		AddBehavior<DebugCommentsVisualBehavior>();
+		AddBehavior<SelectionColliderBehavior>();
 
 		auto* gameManager = GameManager::GetInstance();
 
