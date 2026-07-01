@@ -159,7 +159,16 @@ public:
 			ImGuiIO& io = ImGui::GetIO();
 			ImGuizmo::SetRect(0, 0, io.DisplaySize.x, io.DisplaySize.y);
 
-			if (ImGuizmo::Manipulate(camera->viewportData.viewMatrix.data(), camera->viewportData.projMatrix.data(), gizmoOperation, gizmoMode, selectionTransform.data(), NULL, NULL))
+			bool snapEnabled = ImGui::IsKeyDown(ImGuiKey_ModCtrl);
+			bool precisionSnap = ImGui::IsKeyDown(ImGuiKey_ModShift);
+
+			const bool rotationOnly = gizmoOperation == ImGuizmo::ROTATE;
+
+			float snapValue = rotationOnly ? (precisionSnap ? 1.0f : 15.0f) : (precisionSnap ? 0.1f : 1.0f);
+
+			float snap[3] = { snapValue, snapValue, snapValue };
+
+			if (ImGuizmo::Manipulate(camera->viewportData.viewMatrix.data(), camera->viewportData.projMatrix.data(), gizmoOperation, gizmoMode, selectionTransform.data(), NULL, snapEnabled ? snap : nullptr))
 				selTransform->SetSelectionTransform(selectionTransform);
 		}
     }
