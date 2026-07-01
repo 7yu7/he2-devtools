@@ -197,6 +197,11 @@ namespace ui::operation_modes::modes::level_editor {
 		}
 
 		if (!focusedChunk) ImGui::BeginDisabled();
+		
+		if (ImGui::Button("Reload")) {
+			GetContext().SetFocusedChunk(focusedChunk);
+		}
+		ImGui::SameLine();
 
 		if (ImGui::Button("Export All")) {
 			auto& layers = focusedChunk->GetLayers();

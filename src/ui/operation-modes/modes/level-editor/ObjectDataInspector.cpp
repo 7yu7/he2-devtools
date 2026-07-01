@@ -47,10 +47,7 @@ namespace ui::operation_modes::modes::level_editor {
 
 			if (ImGui::IsItemDeactivatedAfterEdit())
 				Dispatch(StopChangingParametersAction{});
-				
-			if (ImGui::Button("Reload object")){
-				Dispatch(StopChangingParametersAction{});
-			}
+
 			}
 			
 	}
