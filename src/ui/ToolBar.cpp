@@ -168,6 +168,19 @@ void ToolBar::Render() {
 	ImGui::SetItemTooltip("When in debug pause, step through updates frame by frame. Note that if object pause is also enabled objects will not update even while stepping. (Hotkey: F5)");
 	ImGui::SameLine();
 
+#ifndef DEVTOOLS_TARGET_SDK_wars
+	if (ImGui::Button("Kill player"))
+		if (auto* levelInfo = hh::game::GameManager::GetInstance()->GetService<app::level::LevelInfo>())
+			if (auto* player = static_cast<app::player::Player*>(hh::fnd::MessageManager::GetInstance()->GetMessengerByHandle(levelInfo->GetPlayerObject(0))))
+				if (auto* playerKine = player->GetComponent<app::player::GOCPlayerKinematicParams>()){
+					playerKine->SetPosition({ 0.0f, -10000.0f, 0.0f, 0.0f });
+					playerKine->SetVelocity({ 0.0f, -10000.0f, 0.0f, 0.0f });
+				}
+
+	ImGui::SameLine();
+#endif
+
+
 	if (ImGui::IsKeyPressed(ImGuiKey_F3))
 		gameUpdater.flags.flip(GameUpdater::Flags::OBJECT_PAUSE);
 	if (ImGui::IsKeyPressed(ImGuiKey_F4))
