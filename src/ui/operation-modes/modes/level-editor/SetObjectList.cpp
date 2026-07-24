@@ -199,7 +199,11 @@ namespace ui::operation_modes::modes::level_editor {
 		if (!focusedChunk) ImGui::BeginDisabled();
 		
 		if (ImGui::Button("Reload")) {
+			auto* currentLayer = GetContext().placementTargetLayer;
+			auto* currentObject = GetContext().objectClassToPlace;
 			GetContext().SetFocusedChunk(focusedChunk);
+			GetContext().placementTargetLayer = currentLayer;
+			GetContext().objectClassToPlace = currentObject;
 		}
 		ImGui::SameLine();
 
