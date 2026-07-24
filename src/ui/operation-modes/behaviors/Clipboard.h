@@ -60,6 +60,7 @@ public:
 		size_t startIdx = results.size();
 		for (auto& index : indices)
 			results.push_back(traits.CreateObject(entries[index].entry, entries[index].parent == -1 ? std::nullopt : std::make_optional(results[startIdx + indices.find(entries[index].parent)])));
+		Desktop::instance->Dispatch(SceneChangedAction{});
 	}
 
 	void Clear() {
