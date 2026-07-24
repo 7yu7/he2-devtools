@@ -326,6 +326,7 @@ void ResourceBrowser::ShowExportResourceDialog(hh::fnd::ManagedResource* resourc
 	cfg.path = GlobalSettings::defaultFileDialogDirectory;
 	cfg.flags = ImGuiFileDialogFlags_Modal | ImGuiFileDialogFlags_ConfirmOverwrite;
 	cfg.userDatas = resource;
+	cfg.fileName = resource->GetName();
 	ImGuiFileDialog::Instance()->OpenDialog("ResourceExportDialog", "Choose File", extbuf, cfg);
 }
 
