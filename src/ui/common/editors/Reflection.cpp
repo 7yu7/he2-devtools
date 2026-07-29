@@ -21,6 +21,13 @@ struct RflDragDropData {
 	opaque_obj& obj;
 };
 
+struct RflClipboard {
+    const he2sdk::ucsl::GameInterface::RflSystem::RflClass* rflClass{};
+    std::vector<uint8_t> data;
+};
+
+static RflClipboard rflClipboard;
+
 class RenderStaticReflectionEditor {
 public:
 	constexpr static size_t arity = 1;
@@ -246,6 +253,18 @@ public:
 			}
 			if (ImGui::Selectable("Open in memory viewer"))
 				new (Desktop::instance->GetAllocator()) MemoryViewer{ Desktop::instance->GetAllocator(), &obj, rflClass->GetSize() };
+			if (ImGui::Selectable("Copy values")) {
+				rflClipboard.rflClass = rflClass;
+
+				rflClipboard.data.resize(rflClass->GetSize());
+				std::memcpy(rflClipboard.data.data(), &obj, rflClass->GetSize());
+			}
+			if (rflClipboard.rflClass == rflClass && rflClipboard.data.size() == rflClass->GetSize()) {
+				if (ImGui::Selectable("Paste values")) {
+					std::memcpy(&obj, rflClipboard.data.data(), rflClass->GetSize());
+					edited = true;
+				}
+			}
 			ImGui::EndPopup();
 		}
 		
@@ -380,6 +399,18 @@ public:
 			if (ImGui::Selectable("Open in memory viewer"))
 				new (Desktop::instance->GetAllocator()) MemoryViewer{ Desktop::instance->GetAllocator(), &obj, rflClass->GetSize() };
 
+			if (ImGui::Selectable("Copy values")) {
+				rflClipboard.rflClass = rflClass;
+
+				rflClipboard.data.resize(rflClass->GetSize());
+				std::memcpy(rflClipboard.data.data(), &obj, rflClass->GetSize());
+			}
+			if (rflClipboard.rflClass == rflClass && rflClipboard.data.size() == rflClass->GetSize()) {
+				if (ImGui::Selectable("Paste values")) {
+					std::memcpy(&obj, rflClipboard.data.data(), rflClass->GetSize());
+					edited = true;
+				}
+			}
 			ImGui::EndPopup();
 		}
 		
