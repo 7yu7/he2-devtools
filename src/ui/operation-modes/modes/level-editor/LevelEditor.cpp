@@ -71,7 +71,8 @@ namespace ui::operation_modes::modes::level_editor {
 			context.UpdatePaths();
 			Dispatch(PathsUpdatedAction{});
 
-			GetContext().RespawnActiveObject(GetBehavior<SelectionBehavior<Context>>()->GetSelection()[0]);
+			for (auto* obj : selection)
+				GetContext().RespawnActiveObject(obj);
 			break;
 		}
 		case SelectionBehavior<Context>::SelectionChangedAction::id: {
