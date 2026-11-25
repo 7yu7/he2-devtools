@@ -19,8 +19,10 @@ namespace ui::operation_modes::modes::level_editor {
 		}
 		else if (selection.size() > 1) {
 			ImGui::Text("%zd objects selected", selection.size());
-			for (auto obj : selection)
-				ImGui::Text("%s", GetObjectName(obj));
+			for (auto obj : selection) {
+				if (ImGui::Selectable(GetObjectName(obj)))
+					GetBehavior<SelectionBehavior<Context>>()->Select(obj);
+			}
 			ImGui::SeparatorText("Align / Distribute");
 			ImGui::PushID("Align / Distribute");
 			Editor("##AlignX", alignX);
